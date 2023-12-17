@@ -1,5 +1,6 @@
 -- Pull in the wezterm API
 local wezterm = require("wezterm")
+local my_key_setup = require("config.keymaps")
 
 -- This table will hold the configuration.
 local config = {}
@@ -12,64 +13,17 @@ end
 
 -- This is where you actually apply your config choices
 
--- For example, changing the color scheme:
+-- Setup color scheme
 config.color_scheme = "Dark+"
-config.font = wezterm.font("JetBrains Mono", { weight = "Bold", italic = false })
 
-config.leader = { key = "a", mods = "CTRL", timeout_milliseconds = 1000 }
-config.keys = {
-	{
-		key = "|",
-		mods = "LEADER|SHIFT",
-		action = wezterm.action.SplitHorizontal({ domain = "CurrentPaneDomain" }),
-	},
-	{
-		key = "-",
-		mods = "LEADER",
-		action = wezterm.action.SplitVertical({ domain = "CurrentPaneDomain" }),
-	},
-	{
-		key = "o",
-		mods = "LEADER|CTRL",
-		action = wezterm.action.ActivateLastTab,
-	},
-	{ key = "[", mods = "LEADER", action = wezterm.action.ActivateCopyMode },
-	{
-		key = ":",
-		mods = "LEADER",
-		action = wezterm.action.ActivateCommandPalette,
-	},
-	{
-		key = "K",
-		mods = "LEADER|SHIFT",
-		action = wezterm.action.ClearScrollback("ScrollbackAndViewport"),
-	},
-	{
-		key = "t",
-		mods = "LEADER",
-		action = wezterm.action.SpawnTab("CurrentPaneDomain"),
-	},
-	{ key = "n", mods = "LEADER", action = wezterm.action.SpawnWindow },
-	{
-		key = "h",
-		mods = "LEADER",
-		action = wezterm.action.ActivatePaneDirection("Left"),
-	},
-	{
-		key = "l",
-		mods = "LEADER",
-		action = wezterm.action.ActivatePaneDirection("Right"),
-	},
-	{
-		key = "k",
-		mods = "LEADER",
-		action = wezterm.action.ActivatePaneDirection("Up"),
-	},
-	{
-		key = "j",
-		mods = "LEADER",
-		action = wezterm.action.ActivatePaneDirection("Down"),
-	},
-}
--- and finally, return the configuration to wezterm
+-- Setup my font
+config.font = wezterm.font("JetBrains Mono", { weight = "Bold", italic = false })
+config.font_size = 11
+
+config.leader = my_key_setup.leader
+config.keys = my_key_setup.keys
+
+-- setup the visual bell
+config.visual_bell = { fade_in_duration_ms = 150, fade_out_duration_ms = 150 }
+config.colors = { visual_bell = "#1d05f2" }
 return config
