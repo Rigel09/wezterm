@@ -18,7 +18,7 @@ config.color_scheme = "Dark+"
 
 -- Setup my font
 config.font = wezterm.font("JetBrains Mono", { weight = "Bold", italic = false })
-config.font_size = 11
+config.font_size = 9
 
 config.leader = my_key_setup.leader
 config.keys = my_key_setup.keys
